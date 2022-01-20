@@ -1,6 +1,6 @@
 openapi: 3.0.0
 info:
-  version: "1.1.0"
+  version: "1.2.0"
   title: Whisper
   description: WHISPER OPENAPI DOCS
 
@@ -15,15 +15,18 @@ servers:
       basePath:
         default: v1
 
-tags:
-  - name: "Users"
-
 paths:
   /users:
     $ref: "./components/resources/user/users.yaml"
 
   /users/{userId}:
     $ref: "./components/resources/user/user.yaml"
+
+  /users/@me:
+    $ref: "./components/resources/user/me.yaml"
+
+  /auth/login:
+    $ref: "./components/resources/auth/login.yaml"
 
   /swagger:
     x-swagger-pipe: swagger_raw
@@ -37,3 +40,9 @@ components:
 
   responses:
     $ref: "./components/responses/index.yaml"
+
+  securitySchemes:
+    $ref: "./components/securitySchemes/index.yaml"
+
+  requestBodies:
+    $ref: "./components/requestBodies/index.yaml"

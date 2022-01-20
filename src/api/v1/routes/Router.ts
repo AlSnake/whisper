@@ -1,5 +1,6 @@
 import express from 'express';
 import UserRoutes from './User';
+import AuthRoutes from './Auth';
 
 export default class Router {
 	private static router: express.Router;
@@ -15,5 +16,6 @@ export default class Router {
 
 	private static registerLocalRoutes(): void {
 		Router.router.use(Router.basePath, UserRoutes);
+		Router.router.use(Router.basePath, AuthRoutes);
 	}
 }

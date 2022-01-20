@@ -14,3 +14,6 @@ logs
 *.o
 *.d
 *.a
+
+# FILES
+src/api/swagger/swagger.yaml

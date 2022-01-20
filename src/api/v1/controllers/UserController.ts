@@ -101,4 +101,13 @@ export class UserController {
 		await UserService.deleteUser(userId);
 		res.status(204).end();
 	}
+
+	static async getMe(
+		req: Request,
+		res: Response,
+		next: NextFunction
+	): Promise<void> {
+		const userId = req.userId;
+		res.status(200).end();
+	}
 }
