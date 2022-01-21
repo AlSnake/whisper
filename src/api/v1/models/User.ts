@@ -1,7 +1,7 @@
 import { Schema, model } from 'mongoose';
-import { User, UserFlags } from '../interfaces/User';
+import { User, UserExtra, UserFlags } from '../interfaces/User';
 
-const userSchema = new Schema<User>(
+const userSchema = new Schema<User & UserExtra>(
 	{
 		id: {
 			type: String,
@@ -30,8 +30,15 @@ const userSchema = new Schema<User>(
 			enum: UserFlags,
 			required: true,
 		},
+		email_verified: {
+			type: Boolean,
+			required: true,
+			default: false,
+		},
+		email_verify_token: String,
+		email_verify_expiry: Date,
 	},
 	{ timestamps: true }
 );
 
-export default model<User>('User', userSchema);
+export default model<User & UserExtra>('User', userSchema);

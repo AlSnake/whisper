@@ -14,6 +14,12 @@ export class UserService {
 		return findUser;
 	}
 
+	static async getUserByEmail(email: string) {
+		const user = await User.findOne({ email: email });
+		if (!user) ThrowExtendedError('User not found!', 404);
+		return user;
+	}
+
 	static async createUser(user: IUser) {
 		const findUser = await User.findOne({
 			$or: [{ email: user.email }, { username: user.username }],
@@ -43,5 +49,9 @@ export class UserService {
 	static async deleteUser(id: string) {
 		const findUser = await UserService.getUserById(id);
 		return await findUser.deleteOne();
+	}
+
+	static async isEmailVerified(email: string) {
+		return (await UserService.getUserByEmail(email)).email_verified;
 	}
 }

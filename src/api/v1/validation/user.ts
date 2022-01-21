@@ -51,3 +51,15 @@ export function validateUserIdParam(): RequestHandler[] {
 		validationHandler,
 	];
 }
+
+export function validateEmail(): RequestHandler[] {
+	return [
+		body('email', 'Bad Email Address')
+			.exists()
+			.trim()
+			.isLength({ max: 64 })
+			.isEmail()
+			.normalizeEmail(),
+		validationHandler,
+	];
+}

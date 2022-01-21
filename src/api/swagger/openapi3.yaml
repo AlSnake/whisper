@@ -28,6 +28,12 @@ paths:
   /auth/login:
     $ref: "./components/resources/auth/login.yaml"
 
+  /auth/verify:
+    $ref: "./components/resources/auth/verify.yaml"
+
+  /auth/verify/send:
+    $ref: "./components/resources/auth/send.yaml"
+
   /swagger:
     x-swagger-pipe: swagger_raw
 
