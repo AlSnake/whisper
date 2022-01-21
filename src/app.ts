@@ -8,6 +8,7 @@ import { MONGODB_URI } from './config/mongodb';
 import swaggerUi from 'swagger-ui-express';
 import YAML from 'yamljs';
 import RouterV1 from './api/v1/routes/Router';
+import rateLimit from 'express-rate-limit';
 
 const app = express();
 
@@ -21,6 +22,16 @@ app.use(
 	swaggerUi.serve,
 	swaggerUi.setup(YAML.load('./src/api/swagger/swagger.yaml'))
 );
+
+// RATE LIMITER
+const rateLimiter = rateLimit({
+	windowMs: 1 * 60 * 1000,
+	max: 100, // 100 requests per minute
+	standardHeaders: true,
+	legacyHeaders: false,
+	message: 'HTTP 429 TOO MANY REQUESTS',
+});
+app.use(rateLimiter);
 
 // Router
 app.use('/api', RouterV1.getRouter());
